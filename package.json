@@ -1,11 +1,10 @@
 {
-  "name": "gatsby-theme-novela",
-  "author": "dennis@narative.co",
-  "version": "0.18.7",
+  "name": "@sudaraka94/gatsby-theme-novela",
+  "author": "sudarakayasindu@gmail.com",
+  "version": "0.1.0",
   "main": "index.js",
   "license": "MIT",
   "keywords": [
-    "narative",
     "gatsby",
     "gatsby-plugin",
     "gatsby-theme",
