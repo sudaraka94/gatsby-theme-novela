@@ -23,8 +23,7 @@ const siteQuery = graphql`
       }
     }
     allMdx(
-      sort: { fields: frontmatter___date, order: ASC }
-      filter: { frontmatter: { date: { ne: null } } }
+      sort: {frontmatter: {date: ASC}}
     ) {
       edges {
         node {
@@ -42,7 +41,7 @@ const Footer: React.FC<{}> = () => {
   const { name, social } = results.allSite.edges[0].node.siteMetadata;
 
   const copyrightDate = (() => {
-    const { edges } = results.allMdx;
+    const edges = results.allMdx.edges.filter(e => e.node.frontmatter.date);
     const years = [0, edges.length - 1].map((edge) =>
       new Date(edges[edge].node.frontmatter.date).getUTCFullYear()
     );

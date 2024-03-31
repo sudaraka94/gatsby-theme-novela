@@ -1,10 +1,10 @@
 import React from 'react';
 
-import { MDXRenderer } from 'gatsby-plugin-mdx';
+// import { MDXRenderer } from 'gatsby-plugin-mdx';
 import { MDXProvider } from '@mdx-js/react';
 
 import styled from '@emotion/styled';
-import { css } from '@emotion/core';
+import { css } from '@emotion/react';
 import { useColorMode } from 'theme-ui';
 
 import Anchor from '@components/Anchor';
@@ -17,12 +17,10 @@ import Paragraph from '@components/Paragraph';
 import Tables from '@components/Tables';
 import { ImageZoom } from '@components/Image';
 import Figcaption from '@components/Figcaption';
-import * as shortcodes from '@blocks/kit';
 import mediaqueries from '@styles/media';
 import { toKebabCase } from '@utils';
 
 const components = {
-  ...shortcodes,
   img: ImageZoom,
   a: Anchor,
   blockquote: Blockquote,
@@ -36,8 +34,7 @@ const components = {
   ul: Lists.ul,
   ol: Lists.ol,
   p: Paragraph,
-  code: Code.Prism,
-  pre: Code.Pre,
+  pre: Code.Prism,
   table: Tables.Table,
   thead: Tables.Head,
   th: Tables.HeadCell,
@@ -46,18 +43,15 @@ const components = {
 };
 
 interface MDXProps {
-  content: React.ReactNode;
+  children: React.ReactNode;
 }
 
-const MDX: React.FC<MDXProps> = ({ content, children, ...props }) => {
+const MDX: React.FC<MDXProps> = ({ children, ...props }) => {
   const [colorMode] = useColorMode();
 
   return (
     <MDXProvider components={components}>
       <MDXBody>
-        <MDXRenderer isDark={colorMode === 'dark'} {...props}>
-          {content}
-        </MDXRenderer>
         {children}
       </MDXBody>
     </MDXProvider>

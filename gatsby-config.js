@@ -5,11 +5,9 @@ module.exports = ({
   contentPosts = 'content/posts',
   pathPrefix = '',
   sources: { local, contentful } = { local: true, contentful: false },
+  rehypeSlug = import("rehype-slug"),
 }) => ({
   pathPrefix,
-  mapping: {
-    'Mdx.frontmatter.author': `AuthorsYaml`,
-  },
   plugins: [
     `gatsby-plugin-typescript`,
     `gatsby-image`,
@@ -54,6 +52,7 @@ module.exports = ({
         },
         feeds: [
           {
+            title: "blog-feed",
             serialize: ({ query: { site, allArticle, allContentfulArticle } }) => {
               if (local && !contentful) {
                 return allArticle.edges
@@ -248,13 +247,17 @@ module.exports = ({
             },
           },
         ],
-        remarkPlugins: [require(`remark-slug`)], // eslint-disable-line global-require
+        mdxOptions: {
+          rehypePlugins: [
+            rehypeSlug,
+          ]
+        }
       },
     },
     {
       resolve: `gatsby-plugin-emotion`,
       options: {
-        autoLabel: process.env.NODE_ENV === `development`,
+        autoLabel: 'dev-only',
       },
     },
   ],

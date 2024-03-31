@@ -1,8 +1,7 @@
 import React, { useState } from "react";
-import Highlight, { defaultProps, Language } from 'prism-react-renderer'
+import { Highlight, defaultProps, Language, themes } from 'prism-react-renderer'
 import styled from "@emotion/styled";
 import { LiveProvider, LiveEditor, LiveError, LivePreview } from "react-live";
-import theme from "prism-react-renderer/themes/oceanicNext";
 
 import Icons from "@icons";
 import mediaqueries from "@styles/media";
@@ -43,42 +42,13 @@ const Copy: React.FC<CopyProps> = ({ toCopy }) => {
 
 const RE = /{([\d,-]+)}/;
 
-function calculateLinesToHighlight(meta) {
-  if (RE.test(meta)) {
-    const lineNumbers = RE.exec(meta)[1]
-      .split(",")
-      .map(v => v.split("-").map(y => parseInt(y, 10)));
 
-    return index => {
-      const lineNumber = index + 1;
-      const inRange = lineNumbers.some(([start, end]) =>
-        end ? lineNumber >= start && lineNumber <= end : lineNumber === start
-      );
-      return inRange;
-    };
-  } else {
-    return () => false;
-  }
-}
-
-interface CodePrismProps {
-  codeString: string;
-  language: Language;
-  metastring?: string;
-}
-
-const CodePrism: React.FC<CodePrismProps> = ({
-  codeString,
-  language,
-  metastring,
-  ...props
-}) => {
-  const shouldHighlightLine = calculateLinesToHighlight(metastring);
-
+const CodePrism: React.FC = (props) => {
+  const { props: { className, children: codeString, metastring } } = props.children;
   if (props["live"]) {
     return (
       <Container>
-        <LiveProvider code={codeString} noInline={true} theme={theme}>
+        <LiveProvider code={codeString} noInline={true} theme={themes.oceanicNext}>
           <LiveEditor style={{ marginBottom: "3px", borderRadius: "2px" }} />
           <LivePreview style={{ fontSize: "18px", borderRadius: "2px" }} />
           <LiveError style={{ color: "tomato" }} />
@@ -86,21 +56,17 @@ const CodePrism: React.FC<CodePrismProps> = ({
       </Container>
     );
   } else {
+    // fallback to markup
+    const language = className?.match(/(?<=language-)(\w.*?)\b/) != null ? className?.match(/(?<=language-)(\w.*?)\b/)[0] : "markup";
     return (
-      <Highlight {...defaultProps} code={codeString} language={language}>
+      <Highlight code={codeString} language={language}>
         {({ className, tokens, getLineProps, getTokenProps }) => {
           return (
             <div style={{ overflow: "auto" }}>
               <pre className={className} style={{ position: "relative" }}>
                 <Copy toCopy={codeString} />
                 {tokens.map((line, index) => {
-                  const { className } = getLineProps({
-                    line,
-                    key: index,
-                    className: shouldHighlightLine(index)
-                      ? "highlight-line"
-                      : ""
-                  });
+                  const { className } = getLineProps({ line, key: index });
 
                   return (
                     <div key={index} className={className}>
