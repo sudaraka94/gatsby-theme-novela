@@ -67,7 +67,6 @@ module.exports = async ({ actions: { createPage }, graphql }, themeOptions) => {
     }
   `);
 
-  console.log(sources);
   // Defaulting to look at the local MDX files as sources.
   const { local = true, contentful = false } = sources;
 
@@ -94,7 +93,6 @@ module.exports = async ({ actions: { createPage }, graphql }, themeOptions) => {
       log('Querying Authors & Articles source:', 'Local');
       const localAuthors = await graphql(query.local.authors);
       const localArticles = await graphql(query.local.articles);
-
       dataSources.local.authors = localAuthors.data.authors.edges.map(
         normalize.local.authors,
       );
@@ -143,7 +141,7 @@ module.exports = async ({ actions: { createPage }, graphql }, themeOptions) => {
     ],
     'name',
   );
-
+  
   if (articles.length === 0 || authors.length === 0) {
     throw new Error(`
     You must have at least one Author and Post. As reference you can view the
@@ -216,8 +214,9 @@ module.exports = async ({ actions: { createPage }, graphql }, themeOptions) => {
 
     createPage({
       path: article.slug,
-      component: templates.article,
+      component: `${templates.article}?__contentFilePath=${article.content_file_path}`,
       context: {
+        stale: false,
         article,
         authors: authorsThatWroteTheArticle,
         basePath,

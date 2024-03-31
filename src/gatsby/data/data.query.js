@@ -15,7 +15,7 @@ const GatsbyFluid_withWebp = `
 module.exports.local = {
   articles: `{
     articles: allArticle(
-      sort: { fields: [date, title], order: DESC }
+      sort: [{date: DESC}, {title: ASC}]
       limit: 1000
     ) {
       edges {
@@ -31,6 +31,7 @@ module.exports.local = {
           excerpt
           canonical_url
           subscription
+          content_file_path
           body
           hero {
             full: childImageSharp {

@@ -7,7 +7,6 @@ import Layout from "@components/Layout";
 import MDXRenderer from "@components/MDX";
 import Progress from "@components/Progress";
 import Section from "@components/Section";
-import Subscription from "@components/Subscription";
 
 import mediaqueries from "@styles/media";
 import { debounce } from "@utils";
@@ -19,8 +18,6 @@ import ArticlesNext from "../sections/article/Article.Next";
 import ArticleSEO from "../sections/article/Article.SEO";
 import ArticleShare from "../sections/article/Article.Share";
 import ArticleFooter from './article.footer.template';
-
-import { Template } from "@types";
 
 const siteQuery = graphql`
   {
@@ -36,11 +33,11 @@ const siteQuery = graphql`
   }
 `;
 
-const Article: Template = ({ pageContext, location }) => {
-  const contentSectionRef = useRef<HTMLElement>(null);
+const Article = ({ pageContext, location, children }) => {
+  const contentSectionRef = useRef(null);
 
-  const [hasCalculated, setHasCalculated] = useState<boolean>(false);
-  const [contentHeight, setContentHeight] = useState<number>(0);
+  const [hasCalculated, setHasCalculated] = useState(false);
+  const [contentHeight, setContentHeight] = useState(0);
 
   const results = useStaticQuery(siteQuery);
   const name = results.allSite.edges[0].node.siteMetadata.name;
@@ -92,8 +89,9 @@ const Article: Template = ({ pageContext, location }) => {
         <ArticleControls />
       </MobileControls>
       <ArticleBody ref={contentSectionRef}>
-        <MDXRenderer content={article.body}>
+        <MDXRenderer>
           <ArticleShare />
+          {children}
         </MDXRenderer>
       </ArticleBody>
       <ArticleFooter pageContext={pageContext} />

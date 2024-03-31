@@ -18,7 +18,7 @@ module.exports = ({ node, actions, getNode, createNodeId }, themeOptions) => {
   // ///////////////// Utility functions ///////////////////
 
   function generateArticlePermalink(slug, date) {
-    const [year, month, day] = date.match(/\d{4}-\d{2}-\d{2}/)[0].split('-');
+    const [year, month, day] = [date.getFullYear, date.getMonth(), date.getDate()];
     const permalinkData = {
       year,
       month,
@@ -100,6 +100,7 @@ module.exports = ({ node, actions, getNode, createNodeId }, themeOptions) => {
       title: node.frontmatter.title,
       subscription: node.frontmatter.subscription !== false,
       canonical_url: node.frontmatter.canonical_url,
+      content_file_path: node.internal.contentFilePath
     };
 
     createNode({

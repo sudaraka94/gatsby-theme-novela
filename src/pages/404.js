@@ -1,9 +1,9 @@
 import React from "react";
 
-import Layout from "../components/Layout";
-import Section from "../components/Section";
-import SEO from "../components/SEO";
-import Headings from "../components/Headings";
+import Layout from "@components/Layout";
+import Section from "@components/Section";
+import SEO from "@components/SEO";
+import Headings from "@components/Headings";
 
 function NotFoundPage() {
   return (
