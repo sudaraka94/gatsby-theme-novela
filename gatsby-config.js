@@ -5,7 +5,6 @@ module.exports = ({
   contentPosts = 'content/posts',
   pathPrefix = '',
   sources: { local, contentful } = { local: true, contentful: false },
-  rehypeSlug = import("rehype-slug"),
 }) => ({
   pathPrefix,
   plugins: [
@@ -120,7 +119,7 @@ module.exports = ({
               }
               `
                 : !local && contentful
-                ? `
+                  ? `
               {
                 allContentfulArticle(sort: {order: DESC, fields: date}) {
                   edges {
@@ -143,7 +142,7 @@ module.exports = ({
                 }
               }
               `
-                : `
+                  : `
               {
                 allArticle(sort: {order: DESC, fields: date}) {
                   edges {
@@ -249,7 +248,7 @@ module.exports = ({
         ],
         mdxOptions: {
           rehypePlugins: [
-            rehypeSlug,
+            { resolve: "rehype-slug" }
           ]
         }
       },
