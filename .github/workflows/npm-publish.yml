@@ -8,6 +8,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: latest
+      - run: yarn install
       - uses: mikeal/merge-release@master
         env:
             GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
