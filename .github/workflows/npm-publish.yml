@@ -11,6 +11,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: latest
+          registry-url: 'https://registry.npmjs.org'
       - run: yarn install
       - name: Publish package on NPM 📦
         run: npm publish
