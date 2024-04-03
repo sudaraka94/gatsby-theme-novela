@@ -12,8 +12,9 @@ jobs:
         with:
           node-version: 20
           registry-url: https://registry.npmjs.org/
+          always-auth: true
       - run: yarn install
       - name: Publish package on NPM 📦
-        run: yarn publish
+        run: yarn publish --access=public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
