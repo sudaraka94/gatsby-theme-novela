@@ -15,6 +15,6 @@ jobs:
           always-auth: true
       - run: yarn install
       - name: Publish package on NPM 📦
-        run: yarn publish --access=public
+        run: npm publish --access=public
         env:
           NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
