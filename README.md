@@ -1,5 +1,5 @@
 <h1 align="center" style="border-bottom: none;">🖼️ Gatsby Theme Novela</h1>
-<h3 align="center">Minimalisting Gatsby Theme for Blogging</h3>
+<h3 align="center">Minimalistic Gatsby Theme for Blogging</h3>
 <p align="center">
   <a href="https://www.npmjs.com/package/semantic-release">
     <img alt="npm latest version" src="https://img.shields.io/npm/v/@sudaraka94/gatsby-theme-novela/latest.svg">
