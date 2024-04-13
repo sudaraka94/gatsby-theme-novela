@@ -71,3 +71,6 @@ yarn-error.log
 .netlify/
 
 contentful.json
+
+# gatsby-plugin-link-unfurl files
+link-cache
