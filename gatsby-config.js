@@ -10,7 +10,6 @@ module.exports = ({
   plugins: [
     `gatsby-plugin-typescript`,
     `gatsby-image`,
-    `gatsby-plugin-react-helmet`,
     `gatsby-plugin-sharp`,
     `gatsby-transformer-sharp`,
     `gatsby-transformer-remark`,
@@ -214,8 +213,9 @@ module.exports = ({
           {
             resolve: `@raae/gatsby-remark-oembed`,
             options: {
+              usePrefix: ["oembed", "video"],
               providers: {
-                include: ["Instagram"]
+                include: ["Twitter", "Instagram"]
               }
             }
           },
@@ -243,6 +243,12 @@ module.exports = ({
             options: {
               target: '_blank',
               rel: 'noreferrer', // eslint-disable-line unicorn/prevent-abbreviations
+            },
+          },
+          {
+           resolve: `@sudaraka94/gatsby-remark-link-unfurl`,
+            options: {
+              processedUrlsFile: `${__dirname}/link-cache/cache.json`,
             },
           },
         ],

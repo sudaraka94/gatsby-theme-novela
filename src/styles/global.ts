@@ -142,4 +142,120 @@ export const globalStyles = css`
   img.Image__Zoom ~ div {
     background: transparent !important;
   }
+
+  /**
+   * Unfurl styles
+   */
+
+  a.gatsby-remark-link-unfurl__container {
+    margin: 0 auto;
+    font-size: 21px;
+    line-height: 24px;
+    font-weight: lighter;
+    background-color: #fff;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #e1e8ed;
+    overflow: hidden;
+    color: #181919;
+    font-family: InterUI, -apple-system, BlinkMacSystemFont, 'Helvetica Neue', 'Segoe UI', Oxygen, Ubuntu, Cantarell, 'Open Sans', sans-serif;
+    display: flex;
+    text-decoration: none;
+    opacity: 1;
+    position: relative;
+    transition-duration: 150ms;
+    transition-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1);
+    transition-property: background, border-color;
+    will-change: background, border-color;
+    flex-direction: row;
+    height: 8vw;
+
+    @media (max-width: 1024px) {
+      height: 16vw;
+    }
+
+    @media (max-width: 480px) {
+      height: 28vw;
+    }
+}
+
+a.gatsby-remark-link-unfurl__container:hover {
+    background: #f5f8fa;
+    border-color: rgba(136, 153, 166, 0.5);
+    outline: 0;
+}
+
+.gatsby-remark-link-unfurl__media {
+    flex-shrink: 1;
+    flex-grow: 1;
+    flex-basis: 0%;
+    background: transparent no-repeat center center / cover;
+    display: block;
+    overflow: hidden;
+    height: auto;
+}
+
+.gatsby-remark-link-unfurl__content {
+    display: flex;
+    padding: 14px 12px;
+    min-width: 0;
+    box-sizing: border-box;
+    flex: 0 0 75%;
+    justify-content: space-around;
+    flex-direction: column;
+    align-items: stretch;
+}
+
+.gatsby-remark-link-unfurl__title {
+    text-align: left;
+    font-weight: bold;
+    margin: 0;
+    width: 100%;
+    flex-grow: 1.2;
+    font-size: 16px;
+}
+
+.gatsby-remark-link-unfurl__title p {
+    margin: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.gatsby-remark-link-unfurl__description {
+    text-align: left;
+    font-size: 14px;
+    flex-grow: 2;
+    margin: auto 0;
+    line-height: 18px;
+}
+
+.gatsby-remark-link-unfurl__description p {
+    margin: 0;
+}
+
+.gatsby-remark-link-unfurl__container footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    text-align: left;
+    margin: 0;
+    flex-grow: 0;
+    font-size: 12px;
+    width: 100%;
+}
+
+.gatsby-remark-link-unfurl__container footer p {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    margin-top: 0;
+}
+
+.gatsby-remark-link-unfurl__container footer span {
+    min-width: 16px;
+    width: 25px;
+    height: 25px;
+    background-size: contain;
+}
 `;
