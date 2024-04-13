@@ -13,3 +13,6 @@ This repo is a fork of [@narative/gatsby-novela-theme](https://www.npmjs.com/pac
 latest versions of react, react-dom and gatsby. You can find the original readme and the changelog in the [docs-archive](https://github.com/sudaraka94/gatsby-theme-novela/tree/main/docs-archive)
 directory.
 
+## Features
+1. MDX Support
+2. Link Previews
