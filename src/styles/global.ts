@@ -197,10 +197,10 @@ a.gatsby-remark-link-unfurl__container:hover {
 
 .gatsby-remark-link-unfurl__content {
     display: flex;
-    padding: 14px 12px;
+    padding: 10px 10px;
     min-width: 0;
     box-sizing: border-box;
-    flex: 0 0 75%;
+    flex: 0 0 55%;
     justify-content: space-around;
     flex-direction: column;
     align-items: stretch;
@@ -228,6 +228,8 @@ a.gatsby-remark-link-unfurl__container:hover {
     flex-grow: 2;
     margin: auto 0;
     line-height: 18px;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .gatsby-remark-link-unfurl__description p {
