@@ -205,10 +205,6 @@ const PrismCSS = p => css`
 `;
 
 const ImageCSS = css`
-  .gatsby-resp-image-background-image {
-    display: none !important;
-  }
-
   img {
     display: inline-block;
     position: relative;
