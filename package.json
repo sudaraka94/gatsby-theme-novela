@@ -53,6 +53,7 @@
     "gatsby-plugin-feed": "5.13.1",
     "gatsby-plugin-mailchimp": "^5.2.2",
     "gatsby-plugin-mdx": "^5.13.1",
+    "gatsby-plugin-react-helmet": "^6.13.1",
     "gatsby-plugin-sharp": "^5.13.1",
     "gatsby-plugin-theme-ui": "^0.16.2",
     "gatsby-plugin-typescript": "^5.13.1",
