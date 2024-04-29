@@ -382,7 +382,7 @@ const SEO: React.FC<HelmetProps> = ({
 
   if (timeToRead) {
     metaTags.push({ name: 'twitter:label1', value: 'Reading time' });
-    metaTags.push({ name: 'twitter:data1', value: `${timeToRead} min read` });
+    metaTags.push({ name: 'twitter:data1', value: `${timeToRead}` });
   }
 
   if (isSecret) {
