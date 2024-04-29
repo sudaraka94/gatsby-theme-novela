@@ -2,6 +2,7 @@
 
 const crypto = require(`crypto`);
 const slugify = require('slugify');
+const readingTime = require('reading-time');
 
 // Create fields for post slugs and source
 // This will change with schema customization with work
@@ -83,10 +84,13 @@ module.exports = ({ node, actions, getNode, createNodeId }, themeOptions) => {
   }
 
   if (node.internal.type === `Mdx` && source === contentPath) {
+    const readTime = readingTime(node.body)
+
     const fieldData = {
       author: node.frontmatter.author,
       date: node.frontmatter.date,
       hero: node.frontmatter.hero,
+      timeToRead: readTime.text,
       secret: node.frontmatter.secret || false,
       slug: generateSlug(
         basePath,

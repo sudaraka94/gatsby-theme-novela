@@ -18,7 +18,7 @@ module.exports = ({ actions }) => {
       excerpt(pruneLength: Int = 140): String!
       body: String!
       hero: File @fileByRelativePath
-      timeToRead: Int
+      timeToRead: String
       canonical_url: String
       secret: Boolean
       subscription: Boolean
