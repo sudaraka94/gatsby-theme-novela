@@ -9,6 +9,7 @@ module.exports = ({
   pathPrefix,
   plugins: [
     `gatsby-plugin-typescript`,
+    `gatsby-plugin-react-helmet`,
     `gatsby-image`,
     `gatsby-plugin-sharp`,
     `gatsby-transformer-sharp`,
