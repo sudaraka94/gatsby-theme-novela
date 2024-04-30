@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Highlight, defaultProps, Language, themes } from 'prism-react-renderer'
+import { Highlight, themes, Prism } from 'prism-react-renderer'
 import styled from "@emotion/styled";
 import { LiveProvider, LiveEditor, LiveError, LivePreview } from "react-live";
 
@@ -42,8 +42,14 @@ const Copy: React.FC<CopyProps> = ({ toCopy }) => {
 
 const RE = /{([\d,-]+)}/;
 
+const loadCustomLanguages = () => {
+  (typeof global !== "undefined" ? global : window).Prism = Prism
+  require("prismjs/components/prism-java")
+}
+
 
 const CodePrism: React.FC = (props) => {
+  loadCustomLanguages();
   const { props: { className, children: codeString, metastring } } = props.children;
   if (props["live"]) {
     return (
