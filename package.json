@@ -73,6 +73,7 @@
     "gatsby-transformer-yaml": "^5.13.1",
     "lodash": "^4.17.21",
     "prism-react-renderer": "^2.3.1",
+    "prismjs": "^1.29.0",
     "react-helmet": "^6.1.0",
     "react-live": "^4.1.6",
     "react-medium-image-zoom": "^5.1.11",
