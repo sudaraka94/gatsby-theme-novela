@@ -107,12 +107,7 @@ const SEO: React.FC<HelmetProps> = ({
   // If no image is provided lets looks for a default novela static image
   image = image ? image : `${site.siteUrl}/preview.jpg`;
 
-  // Checks if the source of the image is hosted on Contentful
-  if (`${image}`.includes('ctfassets')) {
-    image = `${image}`;
-  } else {
-    image = fullURL(image);
-  }
+  image = fullURL(image);
 
   let siteSchema = `{
     "@context": "https://schema.org",

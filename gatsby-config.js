@@ -4,7 +4,6 @@ module.exports = ({
   contentAuthors = 'content/authors',
   contentPosts = 'content/posts',
   pathPrefix = '',
-  sources: { local, contentful } = { local: true, contentful: false },
 }) => ({
   pathPrefix,
   plugins: [
@@ -53,57 +52,24 @@ module.exports = ({
         feeds: [
           {
             title: "blog-feed",
-            serialize: ({ query: { site, allArticle, allContentfulArticle } }) => {
-              if (local && !contentful) {
-                return allArticle.edges
-                  .filter(edge => !edge.node.secret)
-                  .map(edge => {
-                    return {
-                      ...edge.node,
-                      description: edge.node.excerpt,
-                      date: edge.node.date,
-                      url: site.siteMetadata.siteUrl + edge.node.slug,
-                      guid: site.siteMetadata.siteUrl + edge.node.slug,
-                      // body is raw JS and MDX; will need to be processed before it can be used
-                      // custom_elements: [{ "content:encoded": edge.node.body }],
-                      author: edge.node.author,
-                    };
-                  });
-              } else if (!local && contentful) {
-                return allContentfulArticle.edges
-                  .filter(edge => !edge.node.secret)
-                  .map(edge => {
-                    return {
-                      ...edge.node,
-                      description: edge.node.excerpt,
-                      date: edge.node.date,
-                      url: site.siteMetadata.siteUrl + '/' + edge.node.slug,
-                      guid: site.siteMetadata.siteUrl + '/' + edge.node.slug,
-                      custom_elements: [{ "content:encoded": edge.node.body.childMarkdownRemark.html }],
-                      author: edge.node.author ? edge.node.author.name : '',
-                    };
-                  });
-              } else {
-                const allArticlesData = { ...allArticle, ...allContentfulArticle };
-                return allArticlesData.edges
-                  .filter(edge => !edge.node.secret)
-                  .map(edge => {
-                    return {
-                      ...edge.node,
-                      description: edge.node.excerpt,
-                      date: edge.node.date,
-                      url: site.siteMetadata.siteUrl + edge.node.slug,
-                      guid: site.siteMetadata.siteUrl + edge.node.slug,
-                      // custom_elements: [{ "content:encoded": edge.node.body }],
-                      author: edge.node.author ? edge.node.author.name : '',
-                    };
-                  });
-              }
+            serialize: ({ query: { site, allArticle } }) => {
+              return allArticle.edges
+                .filter(edge => !edge.node.secret)
+                .map(edge => {
+                  return {
+                    ...edge.node,
+                    description: edge.node.excerpt,
+                    date: edge.node.date,
+                    url: site.siteMetadata.siteUrl + edge.node.slug,
+                    guid: site.siteMetadata.siteUrl + edge.node.slug,
+                    // body is raw JS and MDX; will need to be processed before it can be used
+                    // custom_elements: [{ "content:encoded": edge.node.body }],
+                    author: edge.node.author,
+                  };
+                });
             },
             query:
-              local && !contentful
-                ? `
-              {
+              `{
                 allArticle(sort: {order: DESC, fields: date}) {
                   edges {
                     node {
@@ -117,68 +83,7 @@ module.exports = ({
                     }
                   }
                 }
-              }
-              `
-                : !local && contentful
-                  ? `
-              {
-                allContentfulArticle(sort: {order: DESC, fields: date}) {
-                  edges {
-                    node {
-                      excerpt
-                      date
-                      slug
-                      title
-                      body {
-                        childMarkdownRemark {
-                          html
-                        }
-                      }
-                      author {
-                        name
-                      }
-                      secret
-                    }
-                  }
-                }
-              }
-              `
-                  : `
-              {
-                allArticle(sort: {order: DESC, fields: date}) {
-                  edges {
-                    node {
-                      body
-                      excerpt
-                      date
-                      slug
-                      title
-                      author
-                      secret
-                    }
-                  }
-                }
-                allContentfulArticle(sort: {order: DESC, fields: date}) {
-                  edges {
-                    node {
-                      excerpt
-                      date
-                      slug
-                      title
-                      body {
-                        childMarkdownRemark {
-                          html
-                        }
-                      }
-                      author {
-                        name
-                      }
-                      secret
-                    }
-                  }
-                }
-              }
-              `,
+              }`,
             output: '/rss.xml',
           },
         ],
@@ -248,7 +153,7 @@ module.exports = ({
             },
           },
           {
-           resolve: `@sudaraka94/gatsby-remark-link-unfurl`,
+            resolve: `@sudaraka94/gatsby-remark-link-unfurl`,
             options: {
               processedUrlsFile: `${__dirname}/link-cache/cache.json`,
             },

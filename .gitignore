@@ -68,9 +68,5 @@ yarn-error.log
 # Yarn Integrity file
 .yarn-integrity
 
-.netlify/
-
-contentful.json
-
 # gatsby-plugin-link-unfurl files
 link-cache

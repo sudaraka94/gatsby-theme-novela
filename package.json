@@ -20,10 +20,7 @@
   ],
   "scripts": {
     "build": "gatsby build",
-    "clean": "gatsby clean",
-    "contentful:export": "contentful space export --config contentful.json --skip-content --skip-roles --skip-webhooks",
-    "contentful:export:model": "contentful space export --config contentful.json",
-    "contentful:import": "contentful space import --config contentful.json"
+    "clean": "gatsby clean"
   },
   "peerDependencies": {
     "gatsby": "^5.13.3",
@@ -45,7 +42,6 @@
     "@theme-ui/mdx": "^0.16.2",
     "adm-zip": "^0.5.12",
     "babel-plugin-emotion": "^11.0.0",
-    "contentful-cli": "^3.1.44",
     "gatsby": "^5.13.3",
     "gatsby-image": "^3.11.0",
     "gatsby-paginate": "^1.1.1",
