@@ -70,7 +70,7 @@ module.exports = ({
             },
             query:
               `{
-                allArticle(sort: {order: DESC, fields: date}) {
+                allArticle(sort: {date: DESC}) {
                   edges {
                     node {
                       body
