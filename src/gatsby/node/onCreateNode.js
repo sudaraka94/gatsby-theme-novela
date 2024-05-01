@@ -7,7 +7,7 @@ const readingTime = require('reading-time');
 // Create fields for post slugs and source
 // This will change with schema customization with work
 module.exports = ({ node, actions, getNode, createNodeId }, themeOptions) => {
-  const { createNode, createNodeField, createParentChildLink } = actions;
+  const { createNode, createParentChildLink } = actions;
   const contentPath = themeOptions.contentPath || 'content/posts';
   const basePath = themeOptions.basePath || '/';
   const articlePermalinkFormat = themeOptions.articlePermalinkFormat || ':slug';
@@ -125,25 +125,5 @@ module.exports = ({ node, actions, getNode, createNodeId }, themeOptions) => {
     });
 
     createParentChildLink({ parent: fileNode, child: node });
-  }
-
-  if (node.internal.type === `ContentfulAuthor`) {
-    createNodeField({
-      node,
-      name: `slug`,
-      value: generateSlug(
-        basePath,
-        'authors',
-        slugify(node.name, {
-          lower: true,
-        }),
-      ),
-    });
-
-    createNodeField({
-      node,
-      name: `authorsPage`,
-      value: themeOptions.authorsPage || false,
-    });
   }
 };
