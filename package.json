@@ -55,6 +55,7 @@
     "gatsby-plugin-mdx": "^5.13.1",
     "gatsby-plugin-react-helmet": "^6.13.1",
     "gatsby-plugin-sharp": "^5.13.1",
+    "gatsby-plugin-sitemap": "^6.13.1",
     "gatsby-plugin-theme-ui": "^0.16.2",
     "gatsby-plugin-typescript": "^5.13.1",
     "gatsby-remark-autolink-headers": "^6.13.1",
