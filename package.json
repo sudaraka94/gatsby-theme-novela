@@ -79,7 +79,7 @@
     "rehype-slug": "^6.0.0",
     "request": "^2.88.2",
     "slugify": "^1.6.6",
-    "theme-ui": "^0.16.2",
+    "theme-ui": "^0.17.1",
     "typeface-merriweather": "^1.1.13"
   }
 }
