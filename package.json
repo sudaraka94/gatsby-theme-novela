@@ -39,7 +39,7 @@
     "@mdx-js/react": "^3.0.1",
     "@raae/gatsby-remark-oembed": "^0.3.3",
     "@sudaraka94/gatsby-remark-link-unfurl": "^1.0.0",
-    "@theme-ui/mdx": "^0.16.2",
+    "@theme-ui/mdx": "^0.17.1",
     "adm-zip": "^0.5.12",
     "babel-plugin-emotion": "^11.0.0",
     "gatsby": "^5.13.3",
