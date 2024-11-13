@@ -1,9 +1,10 @@
 /* eslint-disable */
+import remarkGfm from "remark-gfm";
 
-module.exports = ({
-  contentAuthors = 'content/authors',
-  contentPosts = 'content/posts',
-  pathPrefix = '',
+export default ({
+  contentAuthors = "content/authors",
+  contentPosts = "content/posts",
+  pathPrefix = ""
 }) => ({
   pathPrefix,
   plugins: [
@@ -33,20 +34,19 @@ module.exports = ({
         `,
         setup: ({
           query: {
-            site: { siteMetadata },
+            site: { siteMetadata }
           },
           ...rest
         }) => {
-          siteMetadata.feed_url = siteMetadata.siteUrl + '/rss.xml';
-          siteMetadata.image_url =
-            siteMetadata.siteUrl + '/icons/icon-512x512.png';
+          siteMetadata.feed_url = `${siteMetadata.siteUrl}/rss.xml`;
+          siteMetadata.image_url = `${siteMetadata.siteUrl}/icons/icon-512x512.png`;
           const siteMetadataModified = siteMetadata;
           siteMetadataModified.feed_url = `${siteMetadata.siteUrl}/rss.xml`;
           siteMetadataModified.image_url = `${siteMetadata.siteUrl}/icons/icon-512x512.png`;
 
           return {
             ...siteMetadataModified,
-            ...rest,
+            ...rest
           };
         },
         feeds: [
@@ -60,16 +60,13 @@ module.exports = ({
                     ...edge.node,
                     description: edge.node.excerpt,
                     date: edge.node.date,
-                    url: site.siteMetadata.siteUrl + edge.node.slug,
-                    guid: site.siteMetadata.siteUrl + edge.node.slug,
-                    // body is raw JS and MDX; will need to be processed before it can be used
-                    // custom_elements: [{ "content:encoded": edge.node.body }],
-                    author: edge.node.author,
+                    url: `${site.siteMetadata.siteUrl}${edge.node.slug}`,
+                    guid: `${site.siteMetadata.siteUrl}${edge.node.slug}`,
+                    author: edge.node.author
                   };
                 });
             },
-            query:
-              `{
+            query: `{
                 allArticle(sort: {date: DESC}) {
                   edges {
                     node {
@@ -84,24 +81,24 @@ module.exports = ({
                   }
                 }
               }`,
-            output: '/rss.xml',
-          },
-        ],
-      },
+            output: "/rss.xml"
+          }
+        ]
+      }
     },
     {
       resolve: `gatsby-source-filesystem`,
       options: {
         path: contentPosts,
-        name: contentPosts,
-      },
+        name: contentPosts
+      }
     },
     {
       resolve: `gatsby-source-filesystem`,
       options: {
         path: contentAuthors,
-        name: contentAuthors,
-      },
+        name: contentAuthors
+      }
     },
     {
       resolve: `gatsby-plugin-mdx`,
@@ -114,8 +111,8 @@ module.exports = ({
               maxWidth: 800,
               linkImagesToOriginal: false,
               quality: 80,
-              withWebp: true,
-            },
+              withWebp: true
+            }
           },
           {
             resolve: `@raae/gatsby-remark-oembed`,
@@ -130,47 +127,47 @@ module.exports = ({
             resolve: "gatsby-remark-embed-video",
             options: {
               width: 680,
-              ratio: 1.77, // Optional: Defaults to 16/9 = 1.77
-              height: 400, // Optional: Overrides optional.ratio
-              related: false, //Optional: Will remove related videos from the end of an embedded YouTube video.
-              noIframeBorder: true, //Optional: Disable insertion of <style> border: 0
+              ratio: 1.77,
+              height: 400,
+              related: false,
+              noIframeBorder: true,
               urlOverrides: [
                 {
-                  id: 'youtube',
-                  embedURL: (videoId) => `https://www.youtube-nocookie.com/embed/${videoId}`,
+                  id: "youtube",
+                  embedURL: videoId =>
+                    `https://www.youtube-nocookie.com/embed/${videoId}`
                 }
-              ] //Optional: Override URL of a service provider, e.g to enable youtube-nocookie support
+              ]
             }
           },
           { resolve: `gatsby-remark-copy-linked-files` },
           { resolve: `gatsby-remark-numbered-footnotes` },
           { resolve: `gatsby-remark-smartypants` },
           {
-            resolve: 'gatsby-remark-external-links',
+            resolve: "gatsby-remark-external-links",
             options: {
-              target: '_blank',
-              rel: 'noreferrer', // eslint-disable-line unicorn/prevent-abbreviations
-            },
+              target: "_blank",
+              rel: "noreferrer"
+            }
           },
           {
             resolve: `@sudaraka94/gatsby-remark-link-unfurl`,
             options: {
-              processedUrlsFile: `${__dirname}/link-cache/cache.json`,
-            },
-          },
+              processedUrlsFile: `${process.cwd()}/link-cache/cache.json`
+            }
+          }
         ],
         mdxOptions: {
-          rehypePlugins: [
-            { resolve: "rehype-slug" }
-          ]
+          remarkPlugins: [remarkGfm],
+          rehypePlugins: [{ resolve: "rehype-slug" }]
         }
-      },
+      }
     },
     {
       resolve: `gatsby-plugin-emotion`,
       options: {
-        autoLabel: 'dev-only',
-      },
-    },
-  ],
+        autoLabel: "dev-only"
+      }
+    }
+  ]
 });
