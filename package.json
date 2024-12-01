@@ -34,7 +34,7 @@
     "react-dom": "^18.2.0"
   },
   "dependencies": {
-    "@emotion/react": "^11.11.4",
+    "@emotion/react": "^11.13.5",
     "@emotion/styled": "^11.11.0",
     "@mdx-js/react": "^3.0.1",
     "@raae/gatsby-remark-oembed": "^0.3.3",
